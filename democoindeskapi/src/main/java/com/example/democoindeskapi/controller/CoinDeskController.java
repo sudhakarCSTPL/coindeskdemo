@@ -70,10 +70,11 @@ public class CoinDeskController {
                     return new ResponseEntity<>(null, HttpStatus.METHOD_NOT_ALLOWED);
                 }
                 case 503 -> {
+                    logger.error(ex.getMessage()+"  "+ex.getStatusCode().value());
                     return ResponseEntity.ok(dataCacheService.getFromCache(startdate, enddate,currency));
                 }
                 default -> {
-                    logger.error("WebClientResponseException default switch  "+ex.getStatusCode().value());
+                    logger.error(ex.getMessage()+"  default switch  "+ex.getStatusCode().value());
                     return ResponseEntity.ok(dataCacheService.getFromCache(startdate, enddate,currency));
 //                    return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
                 }
