@@ -44,16 +44,13 @@ public class CoinDeskReadDataService {
     @Autowired(required = true)
     CurrencyConversionService currencyConversionService;
 
-//    String s = """
-//            https://production.api.coindesk.com/v2/tb/price/values/BTC?start_date=2019-08-10T00:00&end_date=2024-08-10T23:34&ohlc=false&interval=1d&currency=USD
-//            """;
 
 
     public BitcoinValueEntity getData(LocalDate start, LocalDate end,String currency) {
         System.out.println("in service ");
         logger.info(  "startDate  :"+start+ "endDate : "+end+ "currency"+currency);
         BitcoinValueEntity bitcoinValueEntity = new BitcoinValueEntity();
-//        try {
+
         String responseData = WebClient.builder().baseUrl(configBase.getCoindeskurl()).build().get().uri("?start_date=" + start + "T00:00&end_date=" + end + "T23:59&ohlc=false").retrieve().bodyToMono(String.class)
                 .doOnError(throwable -> {
                     if (throwable instanceof org.springframework.web.reactive.function.client.WebClientRequestException) {
@@ -136,11 +133,6 @@ public class CoinDeskReadDataService {
         }
         logger.info(  " End of request in service "   );
         return bitcoinValueEntity;
-//        } catch (WebClientResponseException ex) {
-//            System.out.println("Error      " + ex.toString());
-//            throw ex;
-//        }
-
 
     }
 
