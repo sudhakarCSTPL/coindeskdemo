@@ -122,12 +122,9 @@
         <mxCell id="oI07yYEylZcFNqM7yCuF-61" value="Label" style="edgeLabel;resizable=0;html=1;;align=center;verticalAlign=middle;" connectable="0" vertex="1" parent="oI07yYEylZcFNqM7yCuF-60">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="oI07yYEylZcFNqM7yCuF-62" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.25;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="oI07yYEylZcFNqM7yCuF-25" target="oI07yYEylZcFNqM7yCuF-2">
+        <mxCell id="oI07yYEylZcFNqM7yCuF-62" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=1;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="oI07yYEylZcFNqM7yCuF-25" target="oI07yYEylZcFNqM7yCuF-2">
           <mxGeometry relative="1" as="geometry">
-            <Array as="points">
-              <mxPoint x="462" y="190" />
-              <mxPoint x="620" y="190" />
-            </Array>
+            <Array as="points" />
           </mxGeometry>
         </mxCell>
         <mxCell id="oI07yYEylZcFNqM7yCuF-64" value="&lt;font style=&quot;font-size: 8px;&quot;&gt;upload the image to ECR&lt;/font&gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="1">
