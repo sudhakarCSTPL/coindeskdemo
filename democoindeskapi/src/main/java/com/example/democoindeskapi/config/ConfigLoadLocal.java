@@ -1,7 +1,5 @@
 package com.example.democoindeskapi.config;
 
-import lombok.Getter;
-import lombok.Setter;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
@@ -12,14 +10,12 @@ import org.springframework.stereotype.Component;
 @Profile("dev")
 public class ConfigLoadLocal implements ConfigBase {
 
+    @Value("${currencyConversion.url}")
+    String currencyConversionUrl = "";
     @Value("${spring.profiles.active}")
     private String activeProfile;
-
     @Value("${coindesk-url}")
     private String coindeskurl;
-
-    @Value("${currencyConversion.url}")
-    String currencyConversionUrl ="";
 
     public String getActiveProfile() {
         return activeProfile;

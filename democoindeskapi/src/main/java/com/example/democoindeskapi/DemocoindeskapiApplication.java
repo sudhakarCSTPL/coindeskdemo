@@ -8,12 +8,13 @@ import org.springframework.core.env.Environment;
 @SpringBootApplication
 public class DemocoindeskapiApplication {
 
-	@Autowired
-	 Environment env;
-	public static void main(String[] args) {
+    @Autowired
+    Environment env;
 
-		SpringApplication.run(DemocoindeskapiApplication.class, args);
-	}
+    public static void main(String[] args) {
+
+        SpringApplication.run(DemocoindeskapiApplication.class, args);
+    }
 
 
 }

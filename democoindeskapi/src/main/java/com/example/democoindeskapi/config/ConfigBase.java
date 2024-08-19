@@ -7,14 +7,11 @@ import org.springframework.context.annotation.Configuration;
 public interface ConfigBase {
 
 
-
-
     @Value("${coindesk-url}")
-     String coindeskurl ="";
+    String coindeskurl = "";
 
 
+    public String getCoindeskurl();
 
-    public String getCoindeskurl() ;
-
-    public String getCurrencyConversionUrl() ;
+    public String getCurrencyConversionUrl();
 }

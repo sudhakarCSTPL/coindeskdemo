@@ -1,11 +1,11 @@
 package com.example.democoindeskapi.service;
 
 import com.example.democoindeskapi.config.ConfigBase;
-import com.example.democoindeskapi.controller.CoinDeskController;
 import com.example.democoindeskapi.entity.BitcoinValueEntity;
 import com.example.democoindeskapi.entity.DayOfThePrice;
 import io.netty.handler.timeout.ReadTimeoutException;
 import org.json.JSONArray;
+import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,18 +13,14 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
-import org.json.JSONObject;
 import org.springframework.web.reactive.function.client.WebClientRequestException;
 import org.springframework.web.reactive.function.client.WebClientResponseException;
 import reactor.core.publisher.Mono;
 
-
-import java.math.BigDecimal;
 import java.net.ConnectException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-//import java.util.*;
 import java.util.Date;
 import java.util.concurrent.CompletableFuture;
 
@@ -32,23 +28,18 @@ import java.util.concurrent.CompletableFuture;
 public class CoinDeskReadDataService {
 
     private static final Logger logger = LoggerFactory.getLogger(CoinDeskReadDataService.class);
-
-    @Value("${coindesk-url}")
-    private String baseurl;
     @Autowired
     ConfigBase configBase;
-
     @Autowired
     DataCacheService dataCacheService;
-
     @Autowired(required = true)
     CurrencyConversionService currencyConversionService;
+    @Value("${coindesk-url}")
+    private String baseurl;
 
-
-
-    public BitcoinValueEntity getData(LocalDate start, LocalDate end,String currency) {
+    public BitcoinValueEntity getData(LocalDate start, LocalDate end, String currency) {
         System.out.println("in service ");
-        logger.info(  "startDate  :"+start+ "endDate : "+end+ "currency"+currency);
+        logger.info("startDate  :" + start + "endDate : " + end + "currency" + currency);
         BitcoinValueEntity bitcoinValueEntity = new BitcoinValueEntity();
 
         String responseData = WebClient.builder().baseUrl(configBase.getCoindeskurl()).build().get().uri("?start_date=" + start + "T00:00&end_date=" + end + "T23:59&ohlc=false").retrieve().bodyToMono(String.class)
@@ -109,15 +100,15 @@ public class CoinDeskReadDataService {
         DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
         maxmap.setDate(formatter.format(maxdaydate));
         minmap.setDate(formatter.format(mindaydate));
-        Double currencyrate =1.0;
+        Double currencyrate = 1.0;
         try {
-         currencyrate = currencyConversionService.getCurrencyValue(currency);
-         logger.info(  " currencyRate " + currencyrate  );
-        }catch( Exception ex){
-            name = name +" value in USD only";
+            currencyrate = currencyConversionService.getCurrencyValue(currency);
+            logger.info(" currencyRate " + currencyrate);
+        } catch (Exception ex) {
+            name = name + " value in USD only";
         }
-        minmap.setValue(min*currencyrate);
-        maxmap.setValue(max*currencyrate);
+        minmap.setValue(min * currencyrate);
+        maxmap.setValue(max * currencyrate);
         bitcoinValueEntity.setMin(minmap);
         bitcoinValueEntity.setMax(maxmap);
         bitcoinValueEntity.setIso(iso.toString());
@@ -131,7 +122,7 @@ public class CoinDeskReadDataService {
                 dataCacheService.updateCache(array);
             });
         }
-        logger.info(  " End of request in service "   );
+        logger.info(" End of request in service ");
         return bitcoinValueEntity;
 
     }

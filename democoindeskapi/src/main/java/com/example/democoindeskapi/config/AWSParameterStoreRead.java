@@ -15,13 +15,11 @@ import org.springframework.stereotype.Component;
 public class AWSParameterStoreRead implements ConfigBase {
 
 
-
     @Value("${coindesk-url}")
     private String coindeskurl;
 
     @Value("${currencyConversion.url}")
-    private String currencyConversionUrl ="";
-
+    private String currencyConversionUrl = "";
 
 
     public String getCoindeskurl() {
